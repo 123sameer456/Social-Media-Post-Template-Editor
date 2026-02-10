@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PostCraft - Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+      min-height: 100vh;
+      color: white;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .logo {
+      font-size: 64px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #F97316 0%, #06B6D4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 15px;
+      letter-spacing: -2px;
+    }
+
+    .tagline {
+      color: #94A3B8;
+      font-size: 20px;
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 40px;
+    }
+
+    .demo-section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: white;
+      text-align: center;
+    }
+
+    .templates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .template-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .template-card:hover {
+      transform: translateY(-5px);
+      border-color: #F97316;
+    }
+
+    .template-preview {
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      position: relative;
+    }
+
+    .preview-content {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .preview-text {
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .preview-author {
+      font-size: 13px;
+      font-style: italic;
+      opacity: 0.8;
+      font-family: 'Crimson Pro', serif;
+    }
+
+    .accent-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+    }
+
+    .template-info {
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .template-info h3 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .style-badge {
+      background: linear-gradient(135deg, #F97316, #06B6D4);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .features {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 40px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .feature-item {
+      text-align: center;
+    }
+
+    .feature-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .feature-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #F97316;
+    }
+
+    .feature-desc {
+      color: #94A3B8;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .cta-title {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .cta-text {
+      font-size: 18px;
+      color: #94A3B8;
+      margin-bottom: 30px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 18px 40px;
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(249, 115, 22, 0.4);
+    }
+
+    .tech-stack {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .tech-items {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .tech-item {
+      font-family: 'DM Mono', monospace;
+      color: #06B6D4;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .templates-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .logo {
+        font-size: 48px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="logo">✨ PostCraft</h1>
+      <p class="tagline">Create stunning social media posts in seconds</p>
+    </div>
+
+    <div class="demo-section">
+      <h2 class="section-title">Sample Templates</h2>
+      <div class="templates-grid">
+        <div class="template-card">
+          <div class="template-preview" style="background: #FAFAFA; color: #1A1A1A;">
+            <div class="preview-content">
+              <p class="preview-text">Design is not just what it looks like. Design is how it works.</p>
+              <p class="preview-author">— Steve Jobs</p>
+            </div>
+            <div class="accent-bar" style="background: #E5E5E5;"></div>
+          </div>
+          <div class="template-info">
+            <h3>Minimalist Quote</h3>
+            <span class="style-badge">minimalist</span>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-preview" style="background: #FF6B6B; color: #FFFFFF;">
+            <div class="preview-content">
+              <p class="preview-text">🚀 Exciting News! We're launching something amazing next week.</p>
+            </div>
+            <div class="accent-bar" style="background: #FFE66D;"></div>
+          </div>
+          <div class="template-info">
+            <h3>Vibrant Announcement</h3>
+            <span class="style-badge">vibrant</span>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #FFFFFF;">
+            <div class="preview-content">
+              <p class="preview-text">Believe you can and you're halfway there.</p>
+              <p class="preview-author">— Theodore Roosevelt</p>
+            </div>
+            <div class="accent-bar" style="background: #FFD700;"></div>
+          </div>
+          <div class="template-info">
+            <h3>Gradient Inspiration</h3>
+            <span class="style-badge">gradient</span>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-preview" style="background: #0A0A0A; color: #FAFAFA;">
+            <div class="preview-content">
+              <p class="preview-text">The future belongs to those who believe in the beauty of their dreams.</p>
+              <p class="preview-author">— Eleanor Roosevelt</p>
+            </div>
+            <div class="accent-bar" style="background: #3B82F6;"></div>
+          </div>
+          <div class="template-info">
+            <h3>Dark Mode</h3>
+            <span class="style-badge">dark</span>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-preview" style="background: #FDE1E7; color: #374151;">
+            <div class="preview-content">
+              <p class="preview-text">Create the things you wish existed 💭</p>
+            </div>
+            <div class="accent-bar" style="background: #C084FC;"></div>
+          </div>
+          <div class="template-info">
+            <h3>Pastel Dream</h3>
+            <span class="style-badge">pastel</span>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-preview" style="background: #1A1A2E; color: #00FF9F;">
+            <div class="preview-content">
+              <p class="preview-text">Dream big. Work hard. Stay focused.</p>
+            </div>
+            <div class="accent-bar" style="background: #FF006E;"></div>
+          </div>
+          <div class="template-info">
+            <h3>Neon Glow</h3>
+            <span class="style-badge">neon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="features">
+      <h2 class="section-title">Powerful Features</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🎨</div>
+          <h3 class="feature-title">Full Customization</h3>
+          <p class="feature-desc">Edit content, colors, and fonts with live preview</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📥</div>
+          <h3 class="feature-title">Export to PNG</h3>
+          <p class="feature-desc">Download 1080x1080px images ready for social media</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">Lightning Fast</h3>
+          <p class="feature-desc">Real-time updates and instant downloads</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💾</div>
+          <h3 class="feature-title">Save & Reuse</h3>
+          <p class="feature-desc">Store your favorite designs for later</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <h2 class="cta-title">Ready to Create?</h2>
+      <p class="cta-text">Follow the setup instructions to get started</p>
+      <a href="#" class="btn">Get Started</a>
+      
+      <div class="tech-stack">
+        <h3 style="color: #94A3B8; margin-bottom: 10px;">Built With</h3>
+        <div class="tech-items">
+          <span class="tech-item">⚛️ React 18</span>
+          <span class="tech-item">🐍 Flask</span>
+          <span class="tech-item">🎨 Custom CSS</span>
+          <span class="tech-item">⚡ Vite</span>
+          <span class="tech-item">🖼️ Canvas API</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
